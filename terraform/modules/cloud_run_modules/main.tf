@@ -1,25 +1,42 @@
-resource "google_cloud_run_service" "default" {
+resource "google_cloud_run_service" "fastapi_app" {
   name     = var.cloudrun_name
   location = var.primary_region
   project = var.project_id
+
   template {
     spec {
       containers {
         image = var.image_path
-        startup_probe {
-          initial_delay_seconds = 0
-          timeout_seconds = 1
-          period_seconds = 3
-          failure_threshold = 1
-          tcp_socket {
-            port = var.container_port
+        ports {
+          container_port = 8080
+        }
+        resources {
+          limits = {
+            cpu    = "1"
+            memory = "512Mi"
           }
+        }
+        startup_probe {
+
+          period_seconds     = 240
+          timeout_seconds    = 240
+          failure_threshold  = 1
+          initial_delay_seconds = 0
         }
         liveness_probe {
           http_get {
             path = "/health"
           }
         }
+      }
+
+      container_concurrency = 80
+      timeout_seconds       = 300
+    }
+
+    metadata {
+      annotations = {
+        "run.googleapis.com/startup-cpu-boost" = "true"
       }
     }
   }
@@ -29,9 +46,23 @@ resource "google_cloud_run_service" "default" {
     latest_revision = true
   }
 
-  lifecycle {
-    ignore_changes = [
-      metadata.0.annotations,
-    ]
-  }
+  autogenerate_revision_name = true
+}
+
+resource "google_cloud_run_service_iam_member" "invoker" {
+  service = google_cloud_run_service.fastapi_app.name
+  location = google_cloud_run_service.fastapi_app.location
+  project = google_cloud_run_service.fastapi_app.project
+
+  role   = "roles/run.invoker"
+  member = "allUsers" # Update if needed
+}
+
+resource "google_project_service" "enable_apis" {
+  for_each = toset([
+    "run.googleapis.com",
+    "cloudbuild.googleapis.com"
+  ])
+  project = "gcppracticedemo-467805"
+  service = var.project_id
 }
