@@ -57,12 +57,3 @@ resource "google_cloud_run_service_iam_member" "invoker" {
   role   = "roles/run.invoker"
   member = "allUsers" # Update if needed
 }
-
-resource "google_project_service" "enable_apis" {
-  for_each = toset([
-    "run.googleapis.com",
-    "cloudbuild.googleapis.com"
-  ])
-  project = "gcppracticedemo-467805"
-  service = var.project_id
-}
