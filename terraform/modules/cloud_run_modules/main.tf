@@ -17,10 +17,12 @@ resource "google_cloud_run_service" "fastapi_app" {
           }
         }
         startup_probe {
-
-          period_seconds     = 240
-          timeout_seconds    = 240
-          failure_threshold  = 1
+          tcp_socket {
+            port = 8080
+          }
+          period_seconds        = 240
+          timeout_seconds       = 240
+          failure_threshold     = 1
           initial_delay_seconds = 0
         }
         liveness_probe {
