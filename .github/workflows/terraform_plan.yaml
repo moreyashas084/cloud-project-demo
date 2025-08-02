@@ -32,14 +32,12 @@ jobs:
       - name: Add Plan to PR
         uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
-        with:
-          script: |
-            const output = `#### Terraform Plan\n\n<details><summary>Show Plan</summary>\n\n```terraform\n${process.env.TF_PLAN.replace(/`/g, '\`')}\n```\n\n</details>\n\n*Pushed by: @${github.actor}, Action: \n<https://github.com/${github.repository}/actions/runs/${github.run_id}>*\n`;
+                   script: |
+            const output = `#### Terraform Plan\n\n<details><summary>Show Plan</summary>\n\n```terraform\n${process.env.TF_PLAN}\n```\n\n</details>\n\n*Pushed by: @${github.actor}, Action: \n<https://github.com/${github.repository}/actions/runs/${github.run_id}>*\n`;n';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: output
-            })
-        env:
+            })        env:
           TF_PLAN: ${{ steps.plan.outputs.stdout }}
