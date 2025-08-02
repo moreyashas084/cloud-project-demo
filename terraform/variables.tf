@@ -13,3 +13,8 @@ variable "application_bucket" {
   type = string
   
 }
+
+variable "image_path" {
+  description = "path of the image"
+  type = string
+}
