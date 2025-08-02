@@ -12,7 +12,7 @@ resource "google_cloud_run_service" "default" {
           period_seconds = 3
           failure_threshold = 1
           tcp_socket {
-            port = 8080
+            port = var.container_port
           }
         }
         liveness_probe {
