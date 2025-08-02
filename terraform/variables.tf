@@ -7,3 +7,9 @@ variable "primary_region" {
   description = "primary region for deployment"
   type = string
 }
+
+variable "application_bucket" {
+  description = "application tf state bucket"
+  type = string
+  
+}
