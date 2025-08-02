@@ -46,11 +46,6 @@ resource "google_compute_global_address" "default" {
   name = "${var.project_id}-external-ip"
 }
 
-resource "google_compute_target_http_proxy" "default" {
-  name    = "${var.project_id}-external-http-proxy"
-  url_map = google_compute_url_map.default.id
-}
-
 resource "google_compute_global_forwarding_rule" "http" {
   name       = "${var.project_id}-external-http-forwarding-rule"
   ip_protocol = "TCP"
