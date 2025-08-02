@@ -15,6 +15,10 @@ resource "google_cloud_run_service" "default" {
             port = var.container_port
           }
         }
+        env {
+          name  = "PORT"
+          value = "443"
+        }
         liveness_probe {
           http_get {
             path = "/health"
