@@ -1,0 +1,21 @@
+name: Terrascan PR Scan
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  terrascan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Terrascan Scan
+        uses: tenable/terrascan-action@main
+        with:
+            iac_type: 'terraform'
+            iac_version: 'v14'
+            policy_type: 'gcp'
+            iac_dir: './terraform'
+            sarif_upload: true
