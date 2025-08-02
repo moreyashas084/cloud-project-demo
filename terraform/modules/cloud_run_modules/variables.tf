@@ -22,7 +22,7 @@ variable "image_path" {
 variable "container_port" {
   description = "The port on which the application inside the container listens"
   type        = number
-  default     = 443
+  default     = 8000
 }
 
 variable "allow_unauthenticated" {
