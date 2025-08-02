@@ -19,7 +19,7 @@ jobs:
           terraform_version: 1.0.0 # Specify your desired Terraform version
 
       - name: Terraform Init
-        run: terraform init -backend-config="bucket=Gcpproject-terraform-bucket"
+        run: terraform init -backend-config="bucket=gcpproject-terraform-bucket"
         working-directory: ./terraform
 
       - name: Terraform Apply
