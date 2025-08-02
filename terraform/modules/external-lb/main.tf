@@ -8,7 +8,7 @@ resource "google_compute_url_map" "default" {
 
 resource "google_compute_backend_service" "default" {
   name                  = "${var.project_id}-external-backend-service"
-  protocol              = "HTTP"
+  protocol              = "HTTPS"
   timeout_sec           = 30
   enable_cdn            = false
   load_balancing_scheme = "EXTERNAL"
