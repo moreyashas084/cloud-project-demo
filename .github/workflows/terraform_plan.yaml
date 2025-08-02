@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
@@ -34,19 +34,7 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           script: |
-            const output = `#### Terraform Plan
-
-            <details><summary>Show Plan</summary>
-
-            ```terraform
-            ${process.env.TF_PLAN}
-            ```
-
-            </details>
-
-            *Pushed by: @${github.actor}, Action: 
-            <https://github.com/${github.repository}/actions/runs/${github.run_id}>*
-            `;
+            const output = `#### Terraform Plan\n\n<details><summary>Show Plan</summary>\n\n```terraform\n${process.env.TF_PLAN.replace(/`/g, '\`')}\n```\n\n</details>\n\n*Pushed by: @${github.actor}, Action: \n<https://github.com/${github.repository}/actions/runs/${github.run_id}>*\n`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -54,4 +42,4 @@ jobs:
               body: output
             })
         env:
-          TF_PLAN: ${{ steps.plan.outputs.stdout }} 
+          TF_PLAN: ${{ steps.plan.outputs.stdout }}
