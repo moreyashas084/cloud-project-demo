@@ -34,7 +34,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init -backend-config="bucket=Gcpproject-terraform-bucket"
+        run: terraform init -backend-config="bucket=gcpproject-terraform-bucket"
         working-directory: ./terraform
 
       - name: Terraform Plan
