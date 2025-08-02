@@ -4,6 +4,5 @@ terraform {
     project = "gcppracticedemo-467805"
     region  = "us-central1"
   }
-  experiments = [module_variable_optional_attrs]
-
+  required_version = ">= 4.42.0"
 }
