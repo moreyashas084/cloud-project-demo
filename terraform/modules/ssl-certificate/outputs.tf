@@ -8,10 +8,6 @@ output "certificate_self_link" {
   value       = google_compute_managed_ssl_certificate.default.self_link
 }
 
-output "certificate_status" {
-  description = "The status of the SSL certificate"
-  value       = google_compute_managed_ssl_certificate.default.managed[0].status
-}
 
 output "certificate_domains" {
   description = "The domains covered by the SSL certificate"
