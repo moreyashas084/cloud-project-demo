@@ -54,4 +54,4 @@ jobs:
               body: output
             })
         env:
-          TF_PLAN: ${{ steps.plan.outputs.stdout }}
+          TF_PLAN: ${{ steps.plan.outputs.stdout }} 
