@@ -23,18 +23,9 @@ output "https_proxy_id" {
   value       = google_compute_target_https_proxy.default.id
 }
 
-output "http_proxy_id" {
-  description = "The ID of the HTTP target proxy"
-  value       = google_compute_target_http_proxy.default.id
-}
-
 output "https_forwarding_rule_id" {
   description = "The ID of the HTTPS forwarding rule"
   value       = google_compute_global_forwarding_rule.https.id
 }
 
-output "http_forwarding_rule_id" {
-  description = "The ID of the HTTP forwarding rule"
-  value       = google_compute_global_forwarding_rule.http.id
-}
 
