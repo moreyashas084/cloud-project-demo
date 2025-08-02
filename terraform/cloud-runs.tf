@@ -4,5 +4,5 @@ module "my_cloud_run_service" {
   cloudrun_name = "gcp-practice-cloudrun"
   image_path = var.image_path
   primary_region = var.primary_region
-  container_port = 443
+  container_port = 8000
 }
