@@ -1,9 +1,10 @@
-module "artifact_registry" {
-  source = "GoogleCloudPlatform/artifact-registry/google"
-  version = "~> 0.3" # Specify a suitable version
-
-  project_id    = var.gcp_project
+resource "google_artifact_registry_repository" "my-repo" {
   location      = var.primary_region
-  format        = "DOCKER"   # e.g., "DOCKER", "MAVEN", "NPM", "GO", "PYTHON"
   repository_id = "gcp-demo-project-docker-repository"
+  description   = "cloud runs docker repository"
+  format        = "DOCKER"
+
+  docker_config {
+    immutable_tags = true
+  }
 }
