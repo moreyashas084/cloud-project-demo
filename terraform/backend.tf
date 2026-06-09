@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
-    bucket  = "gcpproject-terraform-bucket"
-    project = "gcppracticedemo-467805"
+    bucket  = "gke-config-state-file"
+    project = "gke-application-project"
     region  = "us-central1"
   }
 }
