@@ -1,10 +1,10 @@
-# Service Account for Bastion
-resource "google_service_account" "bastion" {
-  count      = var.enable_bastion ? 1 : 0
-  account_id = "bastion-sa"
-  project    = var.gcp_project
-  display_name = "Bastion Service Account"
-}
+# # Service Account for Bastion
+# resource "google_service_account" "bastion" {
+#   count      = var.enable_bastion ? 1 : 0
+#   account_id = "bastion-sa"
+#   project    = var.gcp_project
+#   display_name = "Bastion Service Account"
+# }
 
 # IAM: Grant bastion SA permission to get cluster credentials
 resource "google_project_iam_member" "bastion_container_viewer" {
