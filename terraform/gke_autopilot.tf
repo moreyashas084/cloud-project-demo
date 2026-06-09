@@ -32,9 +32,16 @@ resource "google_container_cluster" "autopilot" {
   }
 
   private_cluster_config {
-    enable_private_nodes   = true
+    enable_private_nodes    = true
     enable_private_endpoint = true
-    master_ipv4_cidr_block = var.master_ipv4_cidr
+    master_ipv4_cidr_block  = var.master_ipv4_cidr
+  }
+
+  master_authorized_networks_config {
+    cidr_blocks {
+      cidr_block   = var.autopilot_subnet_cidr
+      display_name = "GKE Subnet"
+    }
   }
 
   # RBAC and metadata
