@@ -28,6 +28,16 @@ resource "google_project_iam_member" "bastion_container_viewer" {
   depends_on = [google_service_account.bastion]
 }
 
+# IAM: Grant bastion SA permission to interact with cluster resources (kubectl)
+resource "google_project_iam_member" "bastion_container_developer" {
+  count   = var.enable_bastion ? 1 : 0
+  project = var.gcp_project
+  role    = "roles/container.developer"
+  member  = "serviceAccount:${google_service_account.bastion[0].email}"
+
+  depends_on = [google_service_account.bastion]
+}
+
 # Bastion VM
 resource "google_compute_instance" "bastion" {
   count                     = var.enable_bastion ? 1 : 0
