@@ -40,6 +40,4 @@ resource "google_container_cluster" "autopilot" {
   # RBAC and metadata
   enable_legacy_abac = false
 
-  # Do not create a default node pool for autopilot-managed clusters.
-  remove_default_node_pool = false
 }
