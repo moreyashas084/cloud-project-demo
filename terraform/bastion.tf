@@ -3,6 +3,7 @@ resource "random_string" "bastion_suffix" {
   length  = 4
   special = false
   lower   = true
+  upper   = false
 }
 
 # Service Account for Bastion
