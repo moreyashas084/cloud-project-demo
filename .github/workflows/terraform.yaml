@@ -32,7 +32,7 @@ jobs:
           terraform_version: 1.0.0 # Specify your desired Terraform version
 
       - name: Terraform Init
-        run: terraform init -backend-config="bucket=gke-config-state-file"
+        run: terraform init -upgrade -backend-config="bucket=gke-config-state-file"
         working-directory: ./terraform
 
       - name: Terraform Plan
