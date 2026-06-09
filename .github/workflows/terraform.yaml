@@ -21,8 +21,8 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: "projects/369637014080/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
-          service_account: "gcppracticedemo-467805@gcppracticedemo-467805.iam.gserviceaccount.com"
+          workload_identity_provider: "projects/770148508854/locations/global/workloadIdentityPools/pool-github-action/providers/github-provider"
+          service_account: "github-wif-svc@gke-application-project.iam.gserviceaccount.com"
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
@@ -36,6 +36,12 @@ jobs:
         run: terraform init -backend-config="bucket=gke-config-state-file"
         working-directory: ./terraform
 
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        working-directory: ./terraform
+
       - name: Terraform Apply
+        id: apply
         run: terraform apply -auto-approve
         working-directory: ./terraform
