@@ -24,12 +24,9 @@ resource "google_container_cluster" "autopilot" {
   network    = var.vpc_network_name
   subnetwork = google_compute_subnetwork.gke_autopilot_subnet.self_link
 
-  autopilot {
-    enabled = true
-  }
+  enable_autopilot = true
 
   ip_allocation_policy {
-    use_ip_aliases               = true
     cluster_secondary_range_name  = "pods"
     services_secondary_range_name = "services"
   }
