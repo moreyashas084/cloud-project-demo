@@ -54,3 +54,21 @@ variable "master_ipv4_cidr" {
   type = string
   default = "172.16.0.0/28"
 }
+
+variable "bastion_machine_type" {
+  description = "Machine type for the bastion VM"
+  type = string
+  default = "e2-small"
+}
+
+variable "bastion_source_ip_ranges" {
+  description = "CIDR ranges allowed to SSH to the bastion (restrict to your IP)"
+  type = list(string)
+  default = ["0.0.0.0/0"] # WARNING: restrict this to your IP or VPN
+}
+
+variable "enable_bastion" {
+  description = "Whether to create a bastion VM for cluster access"
+  type = bool
+  default = true
+}
