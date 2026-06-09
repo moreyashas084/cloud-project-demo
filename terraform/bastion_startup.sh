@@ -2,7 +2,7 @@
 set -e
 
 echo "Bastion startup script running..."
-
+echo "starting setup for bastion host to access GKE cluster with private endpoint"
 # Update system
 apt-get update
 apt-get install -y \
